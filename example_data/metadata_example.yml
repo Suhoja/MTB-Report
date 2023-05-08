@@ -1,0 +1,22 @@
+#This is an example file showing how MTB Report metadata *could* look
+data:
+  cancer_type: lung
+  ref_genome: hg19
+  file_1:
+    format: vcf
+    path: /work/files/example_data/M46.snps.vcf
+    variation_type: snv
+metadata:
+  patient_id: id
+  tissue: none
+  gender: female
+  stage: four
+  previous_ther: none
+control:
+  #var_control sign can be set to extract the specific known variants table.The value can be set as "all","without_wildtype", "wildtype_only","specific_var" or "any_var_only"
+  var_control: without_wildtype
+source:
+  data_type: sequencing
+  id: 12345
+  date: 01/01/2020
+  

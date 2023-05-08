@@ -1,0 +1,6 @@
+"Gene","Variant","Protein_Change"
+"BRAF","Missense_Mutation","V600E"
+"MTOR","Missense_Mutation","F2108L"
+"JAK1", "Missense_Mutation","K344E"
+"BCL2", "Missense_Mutation","F104I"
+

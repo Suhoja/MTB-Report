@@ -1,0 +1,5 @@
+"Database","Downloaded file","URL","Publication","DOI"
+"GDKD.csv","Knowledge_database_v20.0.xlsx","https://www.synapse.org/#!Synapse:syn2370773","Dienstmann et al. Cancer discovery 5.2 (2015) v20.0","10.1158/2159-8290.CD-14-1118"
+"CIViC.csv","01-Jan-2020-ClinicalEvidenceSummaries.tsv","https://civic.genome.wustl.edu/releases","Griffith et al. Nat Genet (2017)","10.1038/ng.3774"
+"TARGET_MERIC.csv","","http://archive.broadinstitute.org/cancer/cga/target","Van Allen et al. Nat Med (2014) v3 & Meric-Bernstam et al. J Natl Cancer Inst.(2015)","10.1038/nm.3559 10.1093/jnci/djv098"
+"OncoKB.csv","allActionableVariants.txt","https://www.oncokb.org/","Chakravarty et al. JCO Precis Oncol. (2017)","10.1200/PO.17.00011"

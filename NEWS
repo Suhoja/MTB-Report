@@ -1,0 +1,83 @@
+______________________________________________
+ 		v0.3.0
+	    08 Jan 2020
+______________________________________________
+Charlotte Höltermann
+contact: charlotte-hoeltermann@web.de
+FUNCTIONALITY
+=====================================
+Added: Localmaster.r
+# script to run MTB from the command line
+# .csv need to be in the exact format as described in Perera-bel et al.  
+# use as follows: Rscript localmaster.r [csv file to be analyzed]
+# IMPORTANT: The filename of the input file must have either "Fusion", "CNV" or "SNV" in it so that the script can correctly identify the type of input. 
+# Added Documentation page that is shown when -h or --help is specified instead of a file
+
+Added: input_maker.r
+# very specific script to turn .xlsx files into .csv files compatible with the localmaster.r script
+# works only for supplementary files (specifically, Supplementary Data 2,7,8,9) from:
+# Ng, S.Y., Yoshida, N., Christie, A.L. et al. Targetable vulnerabilities in T- and NK-cell lymphomas identified through preclinical models. Nat Commun 9, 2024 (2018)
+# doi: 10.1038/s41467-018-04356-9
+# link to publication: https://www.nature.com/articles/s41467-018-04356-9
+# Also processes "", which is a selection from publicatons on Patient data (WES data, RNA-Seq data & targeted sequencing data) for T Cell lymphoma. 
+# can't be used for anything else, but might be worth a look to convert similar .xlsx files
+
+==> More on functionality updates in GitLab!
+
+Added: Docker environment
+MTB is now implemented inside a docker image.
+The application can be run after building the image (which will be included in GitLab) inside a docker container
+=> refer to the Documentation for help (src/Documentation.txt)
+
+DATABASES UPDATES
+==================
+CIViC: Release from 01. Jan 2020
+
+
+______________________________________________
+ 		v0.2.0
+	    Fri 7 Dec, 2018
+______________________________________________
+
+Update CIViC; improved layout; filters for results 
+
+
+DATABASES UPDATES
+=================
+   - CIViC: Release from 01-Dec-2018
+
+FUNCTIONALITY
+=============   
+   - MTB-Report (v1.2.0). Updates: 
+   	- Created function summary_actionable_genes()
+  	- Modified function match_SNV_CIVIC()
+   
+______________________________________________
+ 		v0.1.1
+	    Fri May 18, 2018
+______________________________________________
+ 
+Add tmp/ folder for storing temp files needed for generating PDF reports.
+Update README
+Update NEWS
+
+
+______________________________________________
+ 		v0.1.0
+	    Thu May 17, 2018
+______________________________________________
+ 
+First release
+
+
+DATABASES
+=========
+   - CIViC: Release from 01-May-2018
+   - GDKD: v20.0
+   -TARGET, v3
+   - Meric-Bernstam et al., 2015
+
+FUNCTIONALITY
+=============   
+   - MTB-Report (v1.1.0)
+

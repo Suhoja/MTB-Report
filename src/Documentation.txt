@@ -1,0 +1,133 @@
+#==============================================================#
+#       GENERATION OF MOLECULAR TUMOR BOARD (MTB) REPORT       #
+#--------------------------------------------------------------#
+#   This script filters SNVs and CNVs using gene-drug public   #
+#   databases. Then classifies the variants into levels of     #
+#   evidence and finally presents the results in a report      #
+#==============================================================#
+# by Charlotte Höltermann, Dez 2019 - Feb 2020 ####
+
+### CONTACT ###
+# tim.beissbarth@bioinf.med.uni-goettingen.de
+# juergen.doenitz@bioinf.med.uni-goettingen.de
+# charlotte-hoeltermann@web.de
+
+### FURTHER INFORMATION ###
+# http://www.bioinf.med.uni-goettingen.de/projects/mtb-report/
+# http://wiki.bioinf.med.uni-goettingen.de/doku.php?id=projects:mtb:start
+# https://github.com/jperera-bel/iMTB-Report
+# https://github.com/jperera-bel/MTB-Report
+
+### PUBLICATIONS ###
+# https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0529-2
+
+### INSTRUCTIONS ###
+This script is meant to be run from a specific docker environment containing a base R version and all dependencies.
+The Dockerfile will call this script if a command line argument is given.
+Run a docker container based on the image as follows:
+
+$ docker run -v [Directory containing your data]:/work/files/ rdocker /work/files/[file with your data] [Cancer type] [SNV/CNV/Fusion]
+
+The argument can either be:
+- a .csv file to be analyzed by the MTB tool 
+	-> IMPORTANT: The input files NEED to have "Fusion", "CNV" or "SNV" in them to correctly identify them.
+	-> further information on the formatting requirements of this tool can be found here: https://github.com/jperera-bel/MTB-Report
+- -h or --help to show this documentation
+- [Cancer type] & [SNV/CNV/Fusion] are optional parameters.
+- If [Cancer type] is not specified, it will be set to "unspecified".
+- If [SNV/CNV/Fusion] is not specified, the script will try and grep these strings from the filename. If that is not successful, an error will occur.
+
+Giving no arguments at all will start the Web App version (Shiny) of this tool with a Graphical User Interface.
+
+The cancer types comply with the cancer types one can chose per drop down menu in iMTB (the shiny version).
+They may be one of the following: 
+acute lymphocytic leukemia
+acute lymphocytic leukemia
+acute myeloid leukemia
+angiomyolipoma
+angiosarcoma
+MDS/MPN
+basal cell carcinoma
+biliary tract cancer
+bladder cancer
+breast cancer
+breast cancer
+cervical cancer
+chronic lymphocytic leukemia
+T-cell large granular lymphocytic leukemia
+chronic myeloid leukemia
+colorectal cancer
+colorectal cancer
+colorectal cancer
+dermatofibrosarcoma
+endometrial cancer
+endometrial cancer
+esophageal cancer
+histiocytoma
+gastric cancer
+gastric stromal
+glioblastoma
+glioma
+glioma
+hairy cell leukemia
+head and neck cancer
+hepatocellular carcinoma
+hypereosinphilic syndrome
+hypereosinphilic syndrome
+myofibroblastic tumor
+liposarcoma
+lung cancer
+lung adeno.
+lung cancer
+lung squa.
+lung cancer
+lung cancer
+lung cancer
+lung adeno.
+lung squa.
+lymphangio-leiomyomatosis
+lymphoma large cell anaplastic
+lymphoma large B cell
+lymphoma
+neurosarcoma
+rhabdoid tumor
+mantle cell lymphoma
+medulloblastoma
+megakaryoblastic leukemia
+melanoma
+melanoma
+melanoma
+meningioma
+mesothelioma
+myelofibrosis
+myeloma
+myeloproliferative neoplasm
+myelodisplastic syndrome
+neuroblastoma
+NUT carcinoma
+ovarian cancer
+rhabdoid tumor
+pancreatic cancer
+prostate cancer
+renal cancer
+renal cancer
+renal cancer
+renal cancer
+retinoblastoma
+Rhabdomyosarcoma
+sarcoma
+schwannoma
+mastocytosis
+thymic carcinoma
+thymic lymphoma
+thyroid cancer
+adrenocortical
+paraganglioma
+germ cell
+bone ewing sarcoma
+melanoma
+merkel carcinoma
+osteosarcoma
+skin carcinoma
+
+###
