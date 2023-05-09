@@ -249,13 +249,10 @@ for (i in 1:nrow(path_keep)) {
             stop('The patient has no SNVs, CNVs or gene fusions. Not worth continuing with the analysis!')
         }
 
-       #print("Check cancer_GDKD and cancer_CIVIC")
         cancer_GDKD      = unique(as.character(synonyms[grep(cancer,synonyms$tcga_cancer,ignore.case = T),"knowledge"]))
-       # print(head(cancer_GDKD))
         cancer_CIVIC     = sapply(cancer,function(x) as.character(na.omit(synonyms[grep(x,synonyms$tcga_cancer,ignore.case = T),"civic"])[1]))
         cancer_CIVIC     = paste(cancer_CIVIC,collapse = ",")
         cancer_CIVIC     = unique(strsplit(cancer_CIVIC,",")[[1]])
-       # print(head(cancer_CIVIC))
         #cancer_ONCO      = unique(as.character(synonyms[grep(cancer,synonyms$oncokb,ignore.case = T),"oncokb"]))
 
         ########################################
@@ -351,8 +348,7 @@ for (i in 1:nrow(path_keep)) {
         } 
         if (nrow(SNV) >= 1 || nrow(CNV) >= 1 || length(TX) >= 1) {
             druggableTARGET = match_TARGET_MERIC(SNV, CNV, TX, db_TARGETMERIC)
-        }
-    
+        }       
         print("wtcivic 2")
 
         #### OncoKB
@@ -445,6 +441,10 @@ for (i in 1:nrow(path_keep)) {
         table = table[, c(10,1,2,3,4,5,6,7,8,9)]
         table$Drugs <- sapply(table$Drugs, function(x) capwords(toString(x)))
         table$Drugs <- sapply(table$Drugs, function(x) paste(sort(unlist(strsplit(x, ", |,"))), collapse=", "))
+
+        #Reformat variants containing "*" for better legibility
+        table$Pat_Var <- sapply(table$Pat_Var , function(x) gsub("([A-Z])\\*", "\\1,\\*", x))
+        table$Pat_Var <- sapply(table$Pat_Var , function(x) gsub("\\*([A-Z])", "\\*,\\1", x))
 
         ### Extract table by variants type(any Mut, sepcific or wildtype) ###
         Specific_MutTB_extract<-function(table,var_control_sign){

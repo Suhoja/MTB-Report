@@ -1,0 +1,12 @@
+data:
+  path: M46.snps
+  cancer_type: unspecified
+  variation_type: snv
+  ref_genome: hg38
+tool:
+  git_checksum: undefined
+  date: '2023-05-09'
+databases:
+  gdkd: v20.0
+  civic: 15-jan-01
+  target-meric: v3

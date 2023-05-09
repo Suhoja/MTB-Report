@@ -82,8 +82,8 @@ VCF_to_SNV <- function(Input_Vcf,txDBPath){
   coding <- predictCoding(vcf, txdb, seqSource=Hsapiens)
   coding$GENEID <- gsub("gene:","",coding$GENEID) #Removes gene: which for some reson appears in GENEID after input
   
-  print("Check result of predictCoding() in VCF_to_SNV colCoding")  #Checked, says unspecified genome..
-  print(head(coding))
+  #print("Check result of predictCoding() in VCF_to_SNV colCoding")  #Checked, says unspecified genome..
+  #print(head(coding))
 
   colCoding <-mcols(coding)
 
@@ -100,17 +100,17 @@ VCF_to_SNV <- function(Input_Vcf,txDBPath){
   annots <- annots[match(Hugo_Symbol, annots$ENSEMBL),]
   Hugo_Symbol <- annots$SYMBOL
 
-  print("Check Hugo_symbol in VCF_to_SNV") #19.4. issue between here and check coding
-  print(head(Hugo_Symbol))
+  #print("Check Hugo_symbol in VCF_to_SNV") #19.4. issue between here and check coding
+  #print(head(Hugo_Symbol))
 
   Variant_Classification<-colCoding$CONSEQUENCE
 
   #calculate insertion or deletion by length difference of varAllele and REF
   Indel_status<- lengths(colCoding$varAllele)-lengths(colCoding$REF)
-  SNVTable<- data.frame(Hugo_Symbol,Variant_Classification,Protein_Change,Indel_status)
-  print("Check SNVTable")
-  print(head(SNVTable))
-  print(nrow(SNVTable))                          #At this point the table has data for mutect2, but only 5 rows
+  SNVTable <- data.frame(Hugo_Symbol,Variant_Classification,Protein_Change,Indel_status)
+  #print("Check SNVTable")
+  #print(head(SNVTable))
+  #print(nrow(SNVTable))                          #At this point the table has data for mutect2, but only 5 rows
   #                                               This could be explained by the data having only 14 mutations...
   ####convert variant_classification
   print("t4")                                    # !!!!  When using mutect2 output this is the last output before erroring out  !!!!

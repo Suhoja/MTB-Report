@@ -1,0 +1,210 @@
+\documentclass[9pt]{article}\usepackage[]{graphicx}\usepackage[table,dvipsnames]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+
+% Packages
+\usepackage[a4paper,left=0.7in,right=0.7in,top=0.9in,bottom=0.6in]{geometry} %set margins
+\renewcommand{\rmdefault}{ptm} % Times new roman
+\usepackage{wrapfig}           % placing the figure
+\usepackage{longtable}         % for the table of resutls
+\usepackage[table,dvipsnames]{xcolor}     % removes two lines end table...
+\usepackage{tcolorbox}         % title boxes
+\usepackage{underscore}        % handles underscores
+\setlength{\parindent}{0pt}    % remove ident from new paragraphs
+
+%%%%%%%%%%%%%%%%%%%%
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{\vspace{-2.5cm}\textbf{MTB Report}}
+\author{Bioinformatics Center, University of Eastern Finland, \today}
+\date{}
+\maketitle
+
+%%%%% DISCLAIMER %%%%%
+
+\vspace{-01cm}
+\begin{tcolorbox}[colframe=white,colback=white,halign=left,arc=6mm,top=2mm]
+\fontsize{7}{8}\selectfont
+\textbf{Disclaimer:} This report is intended for research use only and should not be used for medical or professional advice. We make no guarantee of the comprehensiveness, reliability or accuracy of the information on this report. You assume full responsibility for all risks associated with using this report.
+\end{tcolorbox}
+
+
+
+\vspace{-0.2cm}
+ 
+\begin{tcolorbox}[colframe=gray!40!white,width=17cm,height=0.7cm,valign=center]
+\textbf{\large{PATIENT INFORMATION}}
+\end{tcolorbox}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{1.7in}p{2in}p{1.5in}p{1in}}
+%\hline
+\textbf{Patient ID}         &                    & \textbf{Tissue Type}        &      \\
+\textbf{Gender}             &          & \textbf{Tumor Content (\%)} &     \\ 
+\textbf{Disease}            & unspecified               & \textbf{Number SNVs}        &  5408          \\ 
+\textbf{Stage}              &        \\   
+\textbf{Previous Therapies} &      \\ 
+\end{tabular}
+\end{table}
+
+
+
+
+\begin{tcolorbox}[colframe=gray!40!white,width=17cm,height=0.7cm,valign=center]
+\textbf{\large{GENE-DRUG PREDICTIVE ASSOCIATIONS}}
+\end{tcolorbox}
+
+
+\fontsize{8}{9}\selectfont
+%\vspace{0.3cm}
+\textbf{Method:} Somatic variants of the patient (mutations, amplifications, deletions, rearrangments) are searched in curated databases of predictive biomarkers (GKDB\footnote{Dienstmann et al., Cancer Discov (2015), gdkd}, CIViC\footnote{Griffith et al., Nat Genet (2017), civic}) and reported according to their clinical evidence (see Levels of Evidence). In the following two tables, basic information of the somatic variants with relevant clinical implications can be found: \\
+
+\vspace{-0.5cm}
+
+% latex table generated in R 4.2.1 by xtable 1.8-4 package
+% Tue May  9 11:32:19 2023
+\begingroup\fontsize{8pt}{10pt}\selectfont
+\begin{longtable}{p{0.6in}p{2.0in}p{0.8in}}
+  \hline
+\textbf{ Gene } & \textbf{ Patient's Variant } & \textbf{ Level of Evidence } \\ 
+  \hline
+ABCB1 & S1022R, S958R & \textbf{\textcolor{Green}{ B2 }} \\ 
+  BRCA2 & P360S, P237S, S1676I, I2672T, *194Q, I161T, Q2894R, Q383R & \textbf{\textcolor{OliveGreen}{ B1 }},\textbf{\textcolor{Green}{ B2 }} \\ 
+  CDKN2A & G63A & \textbf{\textcolor{Green}{ B2 }},\textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  DDR1 & I1284V & unknown \\ 
+  DNMT3A & E18D & \textbf{\textcolor{OliveGreen}{ B1 }},\textbf{\textcolor{Green}{ B2 }} \\ 
+  ERBB2 & N133D, K62R, A733T, A748T, A487T, A763T & \textbf{\textcolor{Green}{ B2 }},\textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  ERBB3 & P453A, P512A, P31A & \textbf{\textcolor{Green}{ B2 }},\textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  FANCA & C188S & \textbf{\textcolor{Green}{ B2 }} \\ 
+  FAT1 & D3429N & \textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  FCGR2A & I266N, I226N, I181N, I267N, I128N, L19M & \textbf{\textcolor{Green}{ B2 }} \\ 
+  FGFR3 & M727T, M725T, M721T, M613T & \textbf{\textcolor{OliveGreen}{ B1 }},\textbf{\textcolor{Green}{ B2 }},\textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  GNA11 & T257S & \textbf{\textcolor{Green}{ B2 }},\textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  IL7R & E172K, C390G & \textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  MTAP & C55*, C72* & \textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  MTOR & L2P, W1719R, W1790R, G279R & \textbf{\textcolor{Green}{ B2 }},\textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  NF1 & G1498W, G1513W, G1519W, G1529W, G1532W, G1164W, G115W & \textbf{\textcolor{Green}{ B2 }},\textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  NF2 & Q115*, Q73*, Q86* & \textbf{\textcolor{Green}{ B2 }},\textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  NOTCH3 & T784S & unknown \\ 
+  PTPRD & T781A & \textbf{\textcolor{Green}{ B2 }},\textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  RAF1 & L551R, W209G, L584R, L604R, L509R, L580R, L547R, L525R & \textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  RIT1 & Q116H, Q117H, Q80H, Q133H & \textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  TSC1 & L912Q, L861Q, L477Q, L906Q, L911Q, L907Q, E887K, E836K, E452K, E881K, E886K, E882K, A734T, A683T, A313T, A728T, A733T, A729T, M88I & \textbf{\textcolor{Green}{ B2 }} \\ 
+  TSC2 & G10C, G21C, Q7H, R1680L, R1724L, R1634L, R1749L, R1705L, R1682L, R1681L, R1747L, R1646L, R1726L, R1711L, R1683L, R1706L, R1702L, R1693L, G1723C & \textbf{\textcolor{Green}{ B2 }},\textbf{\textcolor{LimeGreen}{ B3 }} \\ 
+  VHL & C176F & \textbf{\textcolor{Green}{ B2 }} \\ 
+   \hline
+\hline
+\end{longtable}
+\endgroup
+
+
+
+
+
+\textbf{Levels of Evidence:} Findings are classified into 6 levels of evidence combining the \textbf{axis A-B} and the \textbf{axis 1-2-3}. Level A means evidence in the same cancer type. Level B means evidence in any other cancer type. On the 1-2-3 axis, level 1 means evidence supported by drug approval organizations or clinical guidelines, level 2 contains clinical evidence (clinical trials, case reports) and level 3 consists of preclinical evidence\\
+
+
+\textbf{Table of Results:} All the predictive associations are detailed in this table. The results are sorted by 1) drug frequency, 2) levels of evidence (A1-B1-A2-B2-A3-B3). To allow a quick interpretation, the type of association (response, resistance) is colored (green, red) and new variants are gray. 
+
+
+% latex table generated in R 4.2.1 by xtable 1.8-4 package
+% Tue May  9 11:32:20 2023
+\begingroup\fontsize{8pt}{10pt}\selectfont
+\begin{longtable}{p{0.35in}p{0.85in}|p{0.75in}p{0.8in}p{0.55in}p{1.0in}p{0.55in}p{0.6in}p{0.15in}}
+  \hline
+\textbf{Patient} &   &   &   & \textbf{Gene-Drug} & \textbf{Associations} &   &   &   \\ 
+  \hline
+\textbf{Gene} & \textbf{Variant} & \textbf{Disease} & \textbf{Known Variant} & \textbf{Predicts} & \textbf{Drugs} & \textbf{Evidence} & \textbf{PMID} & \textbf{Level} \\ 
+   \hline \endhead  \hline
+ERBB2 & N133D, K62R, A733T, A748T, A487T, A763T & lung & A775-G776insYVMA, G776delinsVC, V659E, S310F (GoF) & \textcolor{Green}{ response } & Ado-trastuzumab Emtansine & early trials & ASCO 2017 (abstr 8510) & \textbf{\textcolor{Green}{ B2 }} \\ 
+  NF2 & Q115*, Q73*, Q86* & breast & any variant (LoF) & \textcolor{Green}{ response } & Tensirolimus Plus Chemotherapy & case report & 25878190 & \textbf{\textcolor{Green}{ B2 }} \\ 
+  TSC1 & L912Q, L861Q, L477Q, L906Q, L911Q, L907Q, E887K, E836K, E452K, E881K, E886K, E882K, A734T, A683T, A313T, A728T, A733T, A729T, M88I & endometrial & any variant (GoF) & \textcolor{Green}{ response } & Tensirolimus & case report & 27016228 & \textbf{\textcolor{Green}{ B2 }} \\ 
+  TSC2 & G10C, G21C, Q7H, R1680L, R1724L, R1634L, R1749L, R1705L, R1682L, R1681L, R1747L, R1646L, R1726L, R1711L, R1683L, R1706L, R1702L, R1693L, G1723C & endometrial & any variant (GoF) & \textcolor{Green}{ response } & Tensirolimus & case report & 27016228 & \textbf{\textcolor{Green}{ B2 }} \\ 
+   \hline
+\hline
+\end{longtable}
+\endgroup
+
+
+
+\vspace{0.2cm}
+\textbf{Other genes:} here you can find other genes that might be interesting to check (information from Target DB\footnote{Van Allen et al.,  Nature medicine 20.6 (2014): 682-688, v3} and Meric-Bernstam list\footnote{Meric-Bernstam et al.,  J Natl Cancer Inst. 107(7) (2015)}). No level information is provided in this section. \\
+
+
+
+
+% latex table generated in R 4.2.1 by xtable 1.8-4 package
+% Tue May  9 11:32:20 2023
+\begingroup\fontsize{8pt}{10pt}\selectfont
+\begin{longtable}{p{0.4in}p{0.4in}|p{1in}p{3.2in}p{1in}}
+  \hline
+\textbf{Patient} &   &   & \textbf{Drug-Gene Interactions} &   \\ 
+  \hline
+\textbf{Gene} & \textbf{Variant} & \textbf{Known Variant} & \textbf{Description} & \textbf{Drugs} \\ 
+   \hline \endhead  \hline
+DDR1 & I1284V & Mutation; Amplification &  & Treatment with DDR1 inhibitor \\ 
+  NOTCH3 & T784S & Mutation; Amplification; Rearrangement &  & Treatment with GSIs \\ 
+   \hline
+\hline
+\end{longtable}
+\endgroup
+
+  \end{document}
+
