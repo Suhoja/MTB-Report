@@ -4,9 +4,11 @@ MTB_Report
 This is the source code for MTB-Report. You can use this, if you want to build and start the application via command line.
 NOTE: This version does not include OncoKB as part of the pipeline due to licensing issues.
 
-The version of MTB-Report found in this repository has been modified for the specific needs of UEF Bioinformatics Center. 
+> A public instance of MTB-Report is also available online [here] (http://mtb.bioinf.med.uni-goettingen.de/mtb-report)
 
 MTB-Report is based on the method described in [Perera-Bel et al., 2018](https://doi.org/10.1186/s13073-018-0529-2) and uses the functions available at [MTB-Report repository](https://gitlab.gwdg.de/MedBioinf/mtb/mtb-report).
+
+If you use this method, please cite our publication ([Perera-Bel et al., 2018](https://doi.org/10.1186/s13073-018-0529-2)).
 
 The current release of MTB-Report uses the latest version of MTB-Report (v2.0.0), which includes the following database versions:
 

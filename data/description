@@ -35,6 +35,16 @@ TARGET: Van Allen et al., Nat Med (2014), v3
 	==> Corresponding article: https://academic.oup.com/jnci/article/107/7/djv098/913288
 ==> Saved as TARGET_MERIC.csv
 
+ClinVar: Landrum et al., Nucleic Acids Res . 2018 Jan 4.
+==================================================================
+
+==> Accessed using R-package "rentrez"
+	==> Cran: https://cran.r-project.org/web/packages/rentrez/index.html
+==> Corresponding article: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5753237/
+==> Interfaces with ClinVar API, no local database file
+==> Automatically up to date with latest ClinVar data
+==> Added by UEF Bioinformatics Center
+
 OncoKB.csv: 
 =================================================================
 
@@ -43,6 +53,7 @@ OncoKB.csv:
 ==> Preprocessing done with script "preprocess.R"
 	==> Omitting rows that contain information we don't need
 ==> Saved as OncoKB.csv
+==> Requires licence for clinical use, as of 05/2023 allActionableVariants.txt not available
 
 cancer_types:
 ==================================================================

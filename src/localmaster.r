@@ -40,6 +40,7 @@ if(length(not_installed_bm)) BiocManager::install(not_installed_bm)
 
 library(devtools)
 
+suppressPackageStartupMessages(library(plyr, quietly=TRUE, warn.conflicts = FALSE))
 suppressPackageStartupMessages(library(knitr, quietly=TRUE, warn.conflicts = FALSE))
 suppressPackageStartupMessages(library(stringr, quietly=TRUE, warn.conflicts = FALSE))
 suppressPackageStartupMessages(library(xtable, quietly=TRUE, warn.conflicts = FALSE))
@@ -47,10 +48,13 @@ suppressPackageStartupMessages(library(pander, quietly=TRUE, warn.conflicts = FA
 suppressPackageStartupMessages(library(ggplot2, quietly=TRUE, warn.conflicts = FALSE))
 suppressPackageStartupMessages(library(timeSeries, quietly=TRUE, warn.conflicts = FALSE))
 suppressPackageStartupMessages(library(FirebrowseR, quietly=TRUE, warn.conflicts = FALSE))
+suppressPackageStartupMessages(library(rentrez, quietly=TRUE, warn.conflicts = FALSE))
 suppressPackageStartupMessages(library(yaml, quietly=TRUE, warn.conflicts = FALSE))
 suppressPackageStartupMessages(library(httr, quietly=TRUE, warn.conflicts = FALSE))
 suppressPackageStartupMessages(library(tools, quietly=TRUE, warn.conflicts = FALSE))
 suppressPackageStartupMessages(library(latexpdf, quietly=TRUE, warn.conflicts = FALSE))
+suppressPackageStartupMessages(library(dplyr, quietly=TRUE, warn.conflicts = FALSE))
+
 
 
 ######################################################
@@ -351,6 +355,45 @@ for (i in 1:nrow(path_keep)) {
         }       
         print("wtcivic 2")
 
+        #### CLINVAR DB
+
+        #Create data frame of ClinVar variant information
+        ClinVarSNP = setNames(data.frame(matrix(ncol = 6, nrow = 0), stringsAsFactors = FALSE),c("Gene", "description","review_status","protein_change","trait_name","accession"))
+
+        for (i in 1:nrow(SNV)) { 
+            query <- paste0(SNV$Hugo_Symbol[i],"[GENE]"," AND ", SNV$Protein_Change[i],"[VRNM]")
+            res <- entrez_search(db = "clinvar", term = query)
+            if (res$count > 0) {
+                cv <- tryCatch(entrez_summary(db = "clinvar", id = res$ids),error = function(e){NA})
+                sig <- tryCatch(extract_from_esummary(cv, c("clinical_significance","protein_change","trait_set","accession")),error = function(e){NA})
+                sig <- cbind(Gene = SNV$Hugo_Symbol[i], as.data.frame(sig[[1]]), as.data.frame(sig[[2]]), as.data.frame(sig[[3]]), as.data.frame(sig[[4]]))
+                sig <- sig[,-c(3,6)]
+                colnames(sig)[4] <- "protein_change"
+                colnames(sig)[6] <- "accession"
+#                if (TRUE %in% grepl("Patho", sig$description)) {
+#                    pathogenic <- sig[grep("Patho", sig$description),]
+#                    ClinVarSNP <- rbind(ClinVarSNP, pathogenic)
+#                }
+                sig$protein_change <- SNV$Protein_Change[i]
+                ClinVarSNP <- rbind(ClinVarSNP, sig)
+            }
+        }
+
+        #Rename and reorder columns for better readability
+        colnames(ClinVarSNP) = c("Gene", "Pathogenicity", "Evidence", "Pat_Var", "Trait", "Accession")
+        ClinVarSNP$Trait <- gsub("not specified", "not provided", ClinVarSNP$Trait)
+        ClinVarSNP <- ClinVarSNP[-c(grep("not provided", ClinVarSNP$Trait)),]
+
+        ClinVarSNP <- ClinVarSNP %>%
+                      group_by(Gene, Pathogenicity, Evidence, Trait, Accession) %>%
+                      summarise(Pat_Var = toString(Pat_Var))
+
+        ClinVarSNP = ClinVarSNP[,c(1,6,4,2,3,5)]
+
+        #Clean data frame
+        ClinVarSNP[, 5] <- sapply(ClinVarSNP[, 5], function(x) gsub(", no conflicts|criteria provided, ","", x))
+        ClinVarSNP[, 4] <- sapply(ClinVarSNP[, 4], function(x) gsub(" of pathogenicity","", x))
+        
         #### OncoKB
         #druggableONCO = data.frame()
         #if (nrow(SNV) >=1) {
@@ -483,8 +526,9 @@ for (i in 1:nrow(path_keep)) {
         } else {
             inp_name = gsub(".csv|.maf|.vcf", "", inp_name)
             write.csv(table, paste(loc, "MTB_Reports/", inp_name, "_report.csv", sep = ""), row.names = F)
+            write.csv(ClinVarSNP, paste(loc, "MTB_Reports/", inp_name, "_clinvar.csv", sep = ""), row.names = F)
             # message for command line:
-            print(paste("MTB_Reports/", inp_name, "_report.csv", " has successfully been written. ", sep = ""))
+            print(paste("MTB_Reports/", inp_name, "_report.csv", " and ", "MTB_Reports/", inp_name, "_clinvar.csv"," have successfully been written. ", sep = ""))
         }
 
     },

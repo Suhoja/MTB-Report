@@ -116,6 +116,7 @@ maf    <- inputfile
 ##cnv    <- UPLOAD2()
 ##tx     <- UPLOAD3()
 A      <- table
+cv     <- ClinVarSNP
 #druggableTARGET <- DruggableUPLOAD()[[1]]
 #v_gdkd <- UPLOAD_DB()[[5]]
 #v_civic <- UPLOAD_DB()[[6]]
@@ -245,6 +246,7 @@ colnames(tab_summary_cnvs) <- paste("\\textbf{",colnames(tab_summary_cnvs),"}")
 
 \textbf{Table of Results:} All the predictive associations are detailed in this table. The results are sorted by 1) drug frequency, 2) levels of evidence (A1-B1-A2-B2-A3-B3). To allow a quick interpretation, the type of association (response, resistance) is colored (green, red) and new variants are gray. 
 
+{\renewcommand{\arraystretch}{1.2}
 
 <<label=tab1, echo=FALSE, results='asis',warning=FALSE,message=FALSE>>=
 # Levels table
@@ -295,6 +297,8 @@ while (c < nrow(A2)){
   else{gi=A2[c,"Gene"]}
 }
 
+#format hlines
+hlines <- c(-1, 0, 1, nrow(A2), grep("([A-Z])", A2$Gene))
 
 #### Making double header
 
@@ -308,23 +312,62 @@ A2 <- A2[c(nrow(A2),1:(nrow(A2)-1)),]
 #Create xtable (latex formated table)
 x<-xtable(A2)
 
-#Format witdh and hlines
+#Format witdh
 align(x)<-"p{0.1in}p{0.35in}p{0.85in}|p{0.75in}p{0.8in}p{0.55in}p{1.0in}p{0.55in}p{0.6in}p{0.15in}"
-hlines <- c(-1, 0, 1, nrow(A2))
 
 #Print table
 print(x,size="\\fontsize{8pt}{10pt}\\selectfont",floating = FALSE,tabular.environment = "longtable",include.rownames =FALSE,sanitize.text.function = function(x){x},hline.after = hlines, add.to.row=list(pos = list(1), command = "\\hline \\endhead "))
 }
 @
 
+\begin{tcolorbox}[colframe=gray!40!white,width=17cm,height=0.7cm,valign=center]
+\textbf{\large{SPECIFIC VARIANT-DISEASE CONNECTIONS}}
+\end{tcolorbox}
+
+\vspace{0.2cm}
+\textbf{ClinVar variant information:} This is a list of the patient's variants which could be found in the NCBI ClinVar database.\footnote{Landrum et al. ClinVar: improving access to variant interpretations and supporting evidence. Nucleic Acids Res . 2018 Jan 4.} These include both germline and somatic variants as well as their related traits. Further information about these variants and related publications can be found at www.ncbi.nlm.nih.gov/clinvar/ by searching for the variant accession numbers. \\
+
+
+<<label=tab2, echo=FALSE, results='asis'>>=
+#################
+# ClinVar genes #
+#################
+
+#Remove genes from table when duplicated
+c = 1
+gi = cv[1, "Gene"] # initialize gi with the value in the first row
+while (c < nrow(cv)) {
+  c = c + 1
+  if (cv[c, "Gene"] == gi) {
+    cv[c, 1] = " " # replace values with missing data
+  } else {
+    gi = cv[c, "Gene"]
+  }
+}
+
+if (nrow(cv) !=0){
+
+  hlines <- c(-1, grep("([A-Z])", cv$Gene) - 1)
+
+  colnames(cv)    <- c("\\textbf{Gene}","\\textbf{Patient's Variant}","\\textbf{Trait}","\\textbf{Pathogenicity}","\\textbf{Evidence}","\\textbf{Accession}")
+    
+  y<-xtable(cv)
+  align(y)<-"p{0.1in}p{0.35in}p{0.8in}|p{1.9in}p{1.2in}p{1.15in}p{0.65in}"
+    
+  #Print table
+  print(y,size="\\fontsize{8pt}{10pt}\\selectfont",floating = FALSE,tabular.environment = "longtable",include.rownames =FALSE,sanitize.text.function = function(x){x},hline.after = hlines, add.to.row=list(pos = list(0), command = "\\hline"))
+}
+if (nrow(druggableTARGET)==0){
+  print("No ClinVar data for variants found")
+}
+
+@
+
 
 \vspace{0.2cm}
 \textbf{Other genes:} here you can find other genes that might be interesting to check (information from Target DB\footnote{Van Allen et al.,  Nature medicine 20.6 (2014): 682-688, v3} and Meric-Bernstam list\footnote{Meric-Bernstam et al.,  J Natl Cancer Inst. 107(7) (2015)}). No level information is provided in this section. \\
 
-
-
-
-<<label=tab2, echo=FALSE, results='asis'>>=
+<<label=tab3, echo=FALSE, results='asis'>>=
 ###############
 # Target with other genes
 #############

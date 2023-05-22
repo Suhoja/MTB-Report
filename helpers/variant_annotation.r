@@ -101,12 +101,12 @@ VCF_to_SNV <- function(Input_Vcf,txDBPath){
   Hugo_Symbol <- annots$SYMBOL
 
   #print("Check Hugo_symbol in VCF_to_SNV") #19.4. issue between here and check coding
-  #print(head(Hugo_Symbol))
+  #print(head(colCoding))
 
-  Variant_Classification<-colCoding$CONSEQUENCE
-
+  Variant_Classification <- colCoding$CONSEQUENCE
+ 
   #calculate insertion or deletion by length difference of varAllele and REF
-  Indel_status<- lengths(colCoding$varAllele)-lengths(colCoding$REF)
+  Indel_status <- lengths(colCoding$varAllele)-lengths(colCoding$REF)
   SNVTable <- data.frame(Hugo_Symbol,Variant_Classification,Protein_Change,Indel_status)
   #print("Check SNVTable")
   #print(head(SNVTable))
