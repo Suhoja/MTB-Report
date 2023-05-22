@@ -30,7 +30,7 @@ MTB-Report may be run using Docker as well as directly on the host. The local de
 1. To manually build the MTB-Report Docker container, clone the latest version of MTB-Report project repository: 
 
 ```
-git clone https://gitlab.gwdg.de/MedBioinf/mtb/mtb-report.git
+git clone https://github.com/Suhoja/MTB-Report/mtb-report.git
 ```
 
 2. `cd` into the base directory of the project
