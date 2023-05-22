@@ -4,7 +4,6 @@ MTB_Report
 This is the source code for MTB-Report. You can use this, if you want to build and start the application via command line.
 NOTE: This version does not include OncoKB as part of the pipeline due to licensing issues.
 
-> A public instance of MTB-Report is also available online [here] (http://mtb.bioinf.med.uni-goettingen.de/mtb-report)
 
 MTB-Report is based on the method described in [Perera-Bel et al., 2018](https://doi.org/10.1186/s13073-018-0529-2) and uses the functions available at [MTB-Report repository](https://gitlab.gwdg.de/MedBioinf/mtb/mtb-report).
 
@@ -16,6 +15,9 @@ The current release of MTB-Report uses the latest version of MTB-Report (v2.0.0)
 - [CIViC](https://civic.genome.wustl.edu/): Griffith et al., Nat Genet (2017), release 01-Jan-2020
 - [TARGET](http://archive.broadinstitute.org/cancer/cga/target): Van Allen et al., Nat Med (2014), v3
 - [Meric-Bernstam et al.](https://academic.oup.com/jnci/article/107/7/djv098/913288) , J National Cancer Inst. (2015)
+- [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/): Landrum et al. Nucleic Acid Res. (2018) Jan 4
+
+The addition of ClinVar is an update included by the Bioinformatics Center at the University of Eastern Finland.
 
 -------------------------
 
@@ -53,7 +55,7 @@ docker build --platform linux/x86_64/v8 -t mtb-report -f ./Dockerfile .
 
 There are two different interfaces: the web-interface and the command-line interface (CLI). This version of the tool is optimized for command-line use. Issues may arise when using the web-interface.
 
-#### 1. The web-interface
+#### 1. The web-interface (OUT OF ORDER)
 
 ###### 1. Start the web-interface without a specific Knowledge-Database (automatically downloads and uses the CIViC-Database)
 1. Start-up command:
